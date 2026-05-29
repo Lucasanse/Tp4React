@@ -1,0 +1,52 @@
+{
+    "home": {
+        "title": "Juegos"
+    },
+    "hero": {
+        "title": "Todo lo que querés,",
+        "titleHighlight": "en un solo lugar",
+        "subtitle": "IUPI no es solo un microemprendimiento… ¡es una fábrica de ideas divertidas!",
+        "cta": "Explorar productos"
+    },
+    "SobreNosotros": {
+        "title": "Acerca de nosotros",
+        "title2": "¡Bienvenidos a IUPI!",
+        "question": "¿Qué es IUPI?",
+        "answer": "IUPI no es solo un microemprendimiento… ¡es una fábrica de ideas divertidas! Nacimos para acompañar a padres, docentes y profesionales en el mágico desafío de enseñar...",
+        "question2": "¿Qué materiales usamos?",
+        "answer2": "En IUPI tenemos un universo de materiales tan variado como divertido...",
+        "question3": "¿Querés tu propio juego?",
+        "answer3": "¡Obvio que sí! En IUPI nos encanta crear cosas únicas...",
+        "pill1": "Nuestra historia",
+        "pill2": "Nuestra misión",
+        "pill3": "Nuestros valores"
+    },
+    "header": {
+        "inicio": "Inicio",
+        "SobreNosotros": "Sobre Nosotros",
+        "favoritos": "Favoritos"
+    },
+    "footer": {
+        "integers": "Integrantes"
+    },
+    "details": {
+        "onSale": "En venta"
+    },
+    "general": {
+        "loading": "Loading"
+    },
+    "Favorites": {
+        "noFavoritesMessage": "Todavía no tienes favoritos",
+        "titulo": "Favoritos",
+        "notfound": "No se encontraron resultados"
+
+    },
+    "SearchBar": {
+        "placeholder": "Busca un articulo..."
+    },
+    "404" : {
+
+        "title" : "Pagina no encontrada"
+    }
+
+}

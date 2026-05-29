@@ -1,0 +1,51 @@
+{
+    "home": {
+        "title": "Games"
+    },
+    "hero": {
+        "title": "Everything you want,",
+        "titleHighlight": "all in one place",
+        "subtitle": "IUPI is not just a small business… it's a factory of fun ideas!",
+        "cta": "Explore products"
+    },
+    "SobreNosotros": {
+        "title": "About us",
+        "title2": "Welcome to IUPI!",
+        "question": "What is IUPI?",
+        "answer": "IUPI is not just a small business… it's a factory of fun ideas! We were born to support parents, teachers, and professionals in the magical challenge of teaching...",
+        "question2": "What materials do we use?",
+        "answer2": "At IUPI we have a universe of materials as varied as they are fun...",
+        "question3": "Do you want your own game?",
+        "answer3": "Of course! At IUPI we love creating unique things...",
+        "pill1": "Our history",
+        "pill2": "Our mission",
+        "pill3": "Our values"
+    },
+    "header": {
+        "inicio": "Home",
+        "SobreNosotros": "About Us",
+        "favoritos": "Favorites"
+    },
+    "footer": {
+        "integers": "Team members"
+    },
+    "details": {
+        "onSale": "On sale"
+    },
+    "general": {
+        "loading": "Loading"
+    },
+    "Favorites": {
+        "noFavoritesMessage": "You have no favorites yet",
+        "titulo": "Favorites",
+        "notfound": "No matching results"
+    },
+    "SearchBar": {
+        "placeholder": "Search an item..."
+    },
+    "404" : {
+
+        "title" : "Page not found"
+    }
+    
+}

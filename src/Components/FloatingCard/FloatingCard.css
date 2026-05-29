@@ -1,0 +1,14 @@
+@keyframe fadeIn {
+    from {
+    opacity: 0;
+    }
+    to {
+    opacity: 1;
+    }
+}
+
+
+.fade-In-float{
+    animation: fadeIn 2s ease-in;
+    -webkit-animation: fadeIn 2s ease-in;
+}
