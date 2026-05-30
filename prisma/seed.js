@@ -10,8 +10,10 @@ const adapter = new PrismaPg(pool);
 const prisma = new PrismaClient({ adapter });
 
 async function main() {
-  console.log('Iniciando el sembrado de la base de datos (Seed)...');
+//se borra todo antes
+  await prisma.product.deleteMany({});
 
+  // Array de 20 juguetes inclusivos para IUPI
   const productos = [
     { name: 'Muñeca en silla de ruedas', avatar: 'https://picsum.photos/seed/iupi1/400/400', description: 'Muñeca articulada con silla de ruedas a escala para fomentar la representación y empatía.', price: 15000, stock: 10 },
     { name: 'Bloques sensoriales con texturas', avatar: 'https://picsum.photos/seed/iupi2/400/400', description: 'Set de bloques de madera con diferentes texturas (rugoso, suave, acanalado) para estimulación táctil.', price: 8500, stock: 15 },
@@ -34,6 +36,7 @@ async function main() {
     { name: 'Juego de encastre de gran tamaño', avatar: 'https://picsum.photos/seed/iupi19/400/400', description: 'Piezas gigantes de goma eva, fáciles de manipular para el desarrollo motriz.', price: 14000, stock: 13 },
     { name: 'Set de vajilla adaptada de juguete', avatar: 'https://picsum.photos/seed/iupi20/400/400', description: 'Platos con reborde alto y cubiertos con mangos engrosados para jugar a la comidita.', price: 6500, stock: 16 }
   ];
+
 
   await prisma.product.createMany({
     data: productos,
