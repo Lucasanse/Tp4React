@@ -7,7 +7,6 @@ const app = express();
 // Middlewares
 app.use(cors({ origin: process.env.FRONTEND_URL }));
 app.use(express.json()); 
-app.use(errorHandler)
 
 // Ruta de prueba (Health Check)
 app.get('/api/health', (req, res) => {
@@ -19,8 +18,9 @@ app.get('/api/health', (req, res) => {
 
 //test de errorHandler, descomentar si quieren testear
 
-// app.get('/api/test-error', (req, res, next) => {
-//   next(new Error('error de prueba'));
-// });
+app.get('/api/test-error', (req, res, next) => {
+  next(new Error('error de prueba'));
+});
+app.use(errorHandler)
 
 module.exports = app;
