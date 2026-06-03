@@ -15,7 +15,26 @@ const prisma = new PrismaClient({ adapter });
 
 router.get("/", async (req, res) => {
   try {
-    const productos = await prisma.product.findMany();
+    let productos = null;
+    //Le decimos que si no viene algo
+    const { page, limit, name } = req.query;
+    //Declaramos en vacio take y skip
+    let take, skip;
+
+    // Si limit existe, calculamos paginación
+    if (limit) {
+      take = parseInt(limit);
+      skip = (parseInt(page || 1) - 1) * take;
+    }
+    //Formato para el where en prisma
+    const where = name ? { name: { contains: name, mode: "insensitive" } } : {};
+
+    productos = await prisma.product.findMany({
+      take,
+      skip,
+      where,
+    });
+
     res.json(productos);
   } catch (error) {
     console.error(error);
