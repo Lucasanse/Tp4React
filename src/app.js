@@ -1,18 +1,23 @@
-const express = require('express');
-const cors = require('cors');
+const express = require("express");
+const cors = require("cors");
+
+//Routes
+const productosRoute = require("./routes/productosRouter");
 
 const app = express();
 
 // Middlewares
 app.use(cors({ origin: process.env.FRONTEND_URL }));
-app.use(express.json()); 
+app.use(express.json());
 
 // Ruta de prueba (Health Check)
-app.get('/api/health', (req, res) => {
+app.get("/api/health", (req, res) => {
   res.status(200).json({
     status: "ok",
-    message: "API funcionando correctamente"
+    message: "API funcionando correctamente",
   });
 });
+
+app.use("/api/productos", productosRoute);
 
 module.exports = app;
