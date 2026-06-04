@@ -16,6 +16,7 @@ app.get("/api/health", (req, res) => {
   res.status(200).json({ status: "ok", message: "API funcionando" });
 });
 
+// para testear el error de prueba
 app.get('/api/test-error', (req, res, next) => {
   next(new Error('error de prueba'));
 });

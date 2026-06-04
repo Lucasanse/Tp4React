@@ -43,8 +43,7 @@ router.get("/", async (req, res) => {
 
     res.json(productos);
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Error al obtener productos" });
+    next(error);
   }
 });
 
