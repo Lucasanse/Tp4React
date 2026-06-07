@@ -1,4 +1,3 @@
-// prisma/seed.js
 const { PrismaClient } = require('@prisma/client');
 const { Pool } = require('pg');
 const { PrismaPg } = require('@prisma/adapter-pg');
@@ -10,10 +9,12 @@ const adapter = new PrismaPg(pool);
 const prisma = new PrismaClient({ adapter });
 
 async function main() {
-//se borra todo antes
+  // 1. Limpiar todo antes (importante borrar primero Favorite por las relaciones)
+  await prisma.favorite.deleteMany({});
+  await prisma.user.deleteMany({});
   await prisma.product.deleteMany({});
 
-  // Array de 20 juguetes inclusivos para IUPI
+  // 2. Array de 20 juguetes inclusivos para IUPI
   const productos = [
     { name: 'Muñeca en silla de ruedas', avatar: 'https://picsum.photos/seed/iupi1/400/400', description: 'Muñeca articulada con silla de ruedas a escala para fomentar la representación y empatía.', price: 15000, stock: 10 },
     { name: 'Bloques sensoriales con texturas', avatar: 'https://picsum.photos/seed/iupi2/400/400', description: 'Set de bloques de madera con diferentes texturas (rugoso, suave, acanalado) para estimulación táctil.', price: 8500, stock: 15 },
@@ -37,12 +38,43 @@ async function main() {
     { name: 'Set de vajilla adaptada de juguete', avatar: 'https://picsum.photos/seed/iupi20/400/400', description: 'Platos con reborde alto y cubiertos con mangos engrosados para jugar a la comidita.', price: 6500, stock: 16 }
   ];
 
-
   await prisma.product.createMany({
     data: productos,
   });
 
-  console.log('¡Base de datos poblada exitosamente con 20 juguetes inclusivos!');
+  // 3. Crear 4 usuarios con las contraseñas en texto plano
+  await prisma.user.createMany({
+    data: [
+      { email: "lucas@ejemplo.com", password: "secreto123" },
+      { email: "mathias@ejemplo.com", password: "secreto123" },
+      { email: "ayelen@ejemplo.com", password: "secreto123" },
+      { email: "brian@ejemplo.com", password: "secreto123" }
+    ]
+  });
+
+  // 4. Obtener usuarios y productos para asignarles favoritos
+  const users = await prisma.user.findMany();
+  const products = await prisma.product.findMany({ take: 5 }); // Traemos los primeros 5 productos
+
+  if (users.length === 4 && products.length >= 5) {
+    await prisma.favorite.createMany({
+      data: [
+        // Lucas tiene 2 favoritos
+        { userId: users[0].id, productId: products[0].id },
+        { userId: users[0].id, productId: products[1].id },
+        
+        // Mathias tiene 1 favorito
+        { userId: users[1].id, productId: products[2].id },
+        
+        // Ayelén tiene 1 favorito
+        { userId: users[2].id, productId: products[3].id },
+        
+        // Brian tiene 1 favorito
+        { userId: users[3].id, productId: products[4].id }
+      ]
+    });
+  }
+
 }
 
 main()
