@@ -27,7 +27,7 @@ app.get('/api/test-error', (req, res, next) => {
 // Enrutadores
 app.use('/api/productos', productosRoute);
 
-// Si la ruta no se encontró arriba, entra al notFound (404)
+// Si la ruta no se encontró arriba, entra al notFound (404)aa
 app.use(notFound);
 // Si cualquier ruta hizo next(error), entra al errorHandler (500)
 app.use(errorHandler);
