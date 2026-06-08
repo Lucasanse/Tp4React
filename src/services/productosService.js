@@ -29,8 +29,16 @@ const createProducto = async (data) => {
   });
 };
 
+const deleteProducto = async (id) => {
+  return await prisma.product.delete({
+    where: { id: Number(id) }
+  });
+};
+
+
 module.exports = {
   getProductos,
   getProductoById,
-  createProducto
+  createProducto,
+  deleteProducto
 };
