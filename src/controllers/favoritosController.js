@@ -1,6 +1,6 @@
 const prisma = require("../prisma/prismaClient");
 
-// GET /api/favoritos/:userId -> Obtiene todos los favoritos de un usuario
+// GET /api/favoritos/:userId 
 const getFavoritos = async (req, res, next) => {
   try {
     const userId = parseInt(req.params.userId, 10);
@@ -21,7 +21,7 @@ const getFavoritos = async (req, res, next) => {
   }
 };
 
-// POST /api/favoritos -> Agrega un producto a favoritos
+// POST /api/favoritos 
 const addFavorito = async (req, res, next) => {
   try {
     const { userId, productId } = req.body;
@@ -42,7 +42,7 @@ const addFavorito = async (req, res, next) => {
   }
 };
 
-// DELETE /api/favoritos -> Elimina un producto de favoritos
+// DELETE /api/favoritos 
 const removeFavorito = async (req, res, next) => {
   try {
     const { userId, productId } = req.body;

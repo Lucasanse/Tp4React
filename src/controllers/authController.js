@@ -28,14 +28,14 @@ const login = async (req, res, next) => {
 
     const user = await prisma.user.findUnique({ where: { email } });
 
-    // Comparar contraseña plana directamente
+   
     if (!user || user.password !== password) {
       const error = new Error("Credenciales inválidas");
       error.status = 401;
       return next(error);
     }
 
-    // Devolvemos el ID del usuario para que el frontend lo guarde
+    
     res.json({ id: user.id, email: user.email });
   } catch (error) {
     next(error);
