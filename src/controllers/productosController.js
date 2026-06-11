@@ -66,10 +66,23 @@ const deleteProducto = async (req, res, next) => {
   }
 };
 
+const actualizarProducto = async (req, res, next) => {
+  try {
+    const { id } = req.params
+    const updated = await productosService.actualizarProducto(id, req.body);
+    res.json({ message: "Actualizado correctamente", data: updated })
+  } catch (error) {
+    res.json({ message: "Error de actualizacion de datos", data: req.body })
+    next(error);
+  }
+}
+
+
 
 module.exports = {
   getAll,
   getById,
   create,
-  deleteProducto
+  deleteProducto,
+  actualizarProducto
 };
