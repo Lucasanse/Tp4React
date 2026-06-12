@@ -56,8 +56,20 @@ const create = async (req, res, next) => {
   }
 };
 
+const deleteProducto = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const deleted = await productosService.deleteProducto(id);
+    res.json({ message: 'Eliminado correctamente', data: deleted });
+  } catch (error) {
+    next(error);
+  }
+};
+
+
 module.exports = {
   getAll,
   getById,
-  create
+  create,
+  deleteProducto
 };

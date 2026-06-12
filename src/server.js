@@ -23,6 +23,7 @@ app.use('/api/productos', productosRoute);
 app.use('/api/auth', authRoute);
 app.use('/api/favoritos', favoritesRoute); 
 
+// Si la ruta no se encontró arriba, entra al notFound (404)aa
 app.use(notFound);
 app.use(errorHandler);
 
