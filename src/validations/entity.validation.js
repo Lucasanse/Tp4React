@@ -1,5 +1,24 @@
+const validateProperties = (data) => {
+  let properties = []
+  let invalidProperties = []
+  for (const [key, value] of Object.entries(data)) {
+    properties.push(key)
+  }
+  for (let index = 0; index < properties.length; index++) {
+    if(!["id", "name", "avatar", "description", "price", "stock", "createdAt", "updatedAt"].includes(properties[index])){
+      invalidProperties.push(properties[index])
+    }    
+  }
+  return invalidProperties
+}
+
 const validateProduct = (data) => {
   const errors = [];
+  const invalidProperties = validateProperties(data)
+
+  if(invalidProperties.length > 0){
+    errors.push("Campos inválidos: " + invalidProperties);
+  }
 
   // Validar name
   if (!data.name || typeof data.name !== 'string' || data.name.trim() === '') {

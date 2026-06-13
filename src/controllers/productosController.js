@@ -66,10 +66,29 @@ const deleteProducto = async (req, res, next) => {
   }
 };
 
+const actualizarProducto = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const errors = validateProduct(req.body)
+    if(errors.length > 0){
+      const error = new Error("Error de actualizacion de datos");
+      error.status = 400;
+      error.errors = errors; 
+      return next(error); 
+    }
+    const updated = await productosService.actualizarProducto(id, req.body);
+    res.json({ message: 'Actualizado correctamente', data: updated });
+  } catch (error) {
+    next(error);
+  }
+}
+
+
 
 module.exports = {
   getAll,
   getById,
   create,
-  deleteProducto
+  deleteProducto,
+  actualizarProducto
 };
