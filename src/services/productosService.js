@@ -1,5 +1,6 @@
 const prisma = require("../prisma/prismaClient");
 
+
 const getProductos = async (page, limit, name) => {
   let take, skip;
 
@@ -30,18 +31,31 @@ const createProducto = async (data) => {
 };
 
 const deleteProducto = async (id) => {
-  return await prisma.product.delete({
+  const prodToDelete = await prisma.product.findUnique({
     where: { id: Number(id) }
-  });
+  })
+  if(prodToDelete){
+    return await prisma.product.delete({
+      where: { id: Number(id) }
+    });
+  }else{
+    return null
+  }
 };
 
 const actualizarProducto = async (id, prod) => {
-  return await prisma.product.update(
-  {
+  const prodToDelete = await prisma.product.findUnique({
+    where: { id: Number(id) }
+  })
+  if(prodToDelete){
+    return await prisma.product.update({
     where: { id: Number(id) },
-    data: prod
+    data: prod,
+  })
+  } else {
+    return null
   }
-)}
+};
 
 
 
