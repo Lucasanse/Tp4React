@@ -9,10 +9,10 @@ const adapter = new PrismaPg(pool);
 const prisma = new PrismaClient({ adapter });
 
 async function main() {
-  // 1. Limpiar todo antes (importante borrar primero Favorite por las relaciones)
-  await prisma.favorite.deleteMany({});
-  await prisma.user.deleteMany({});
-  await prisma.product.deleteMany({});
+
+  await prisma.$executeRawUnsafe(`TRUNCATE TABLE "Favorite" RESTART IDENTITY CASCADE;`);
+  await prisma.$executeRawUnsafe(`TRUNCATE TABLE "User" RESTART IDENTITY CASCADE;`);
+  await prisma.$executeRawUnsafe(`TRUNCATE TABLE "Product" RESTART IDENTITY CASCADE;`);
 
   // 2. Array de 20 juguetes inclusivos para IUPI
   const productos = [
