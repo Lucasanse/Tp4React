@@ -1,6 +1,11 @@
 const productosService = require("../services/productosService");
 const { validateProduct } = require("../validations/entity.validation");
 
+const prodNotFound = (next) => {
+  const error = new Error("Juguete no encontrado");
+  error.status = 404; 
+  return next(error); 
+}
 
 const getAll = async (req, res, next) => {
   try {
@@ -26,9 +31,7 @@ const getById = async (req, res, next) => {
     const producto = await productosService.getProductoById(productId);
 
     if (!producto) {
-      const error = new Error("Juguete no encontrado");
-      error.status = 404; 
-      return next(error); 
+      prodNotFound(next)
     }
 
     res.json(producto);
@@ -60,6 +63,11 @@ const deleteProducto = async (req, res, next) => {
   try {
     const { id } = req.params;
     const deleted = await productosService.deleteProducto(id);
+
+    if(!deleted){
+      prodNotFound(next)
+    }
+
     res.json({ message: 'Eliminado correctamente', data: deleted });
   } catch (error) {
     next(error);
@@ -77,7 +85,11 @@ const actualizarProducto = async (req, res, next) => {
       return next(error); 
     }
     const updated = await productosService.actualizarProducto(id, req.body);
-    res.json({ message: 'Actualizado correctamente', data: updated });
+    if(!updated){
+      return prodNotFound(next)
+    }else{
+      res.json({ message: 'Actualizado correctamente', data: updated });
+    }
   } catch (error) {
     next(error);
   }
