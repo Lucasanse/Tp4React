@@ -116,6 +116,7 @@ async function main() {
   // 3. Crear 4 usuarios con las contraseñas en texto plano
   await prisma.user.createMany({
     data: [
+      { email: "admin@admin.com", password: "secreto123" },
       { email: "lucas@ejemplo.com", password: "secreto123" },
       { email: "mathias@ejemplo.com", password: "secreto123" },
       { email: "ayelen@ejemplo.com", password: "secreto123" },
@@ -123,28 +124,23 @@ async function main() {
     ],
   });
 
-  // 4. Obtener usuarios y productos para asignarles favoritos
   const users = await prisma.user.findMany();
   const products = await prisma.product.findMany({ take: 5 }); // Traemos los primeros 5 productos
 
-  if (users.length === 4 && products.length >= 5) {
-    await prisma.favorite.createMany({
-      data: [
-        // Lucas tiene 2 favoritos
-        { userId: users[0].id, productId: products[0].id },
-        { userId: users[0].id, productId: products[1].id },
+  await prisma.favorite.createMany({
+    data: [
 
-        // Mathias tiene 1 favorito
-        { userId: users[1].id, productId: products[2].id },
+      { userId: users[0].id, productId: products[0].id },
+      { userId: users[0].id, productId: products[1].id },
 
-        // Ayelén tiene 1 favorito
-        { userId: users[2].id, productId: products[3].id },
+      { userId: users[1].id, productId: products[2].id },
 
-        // Brian tiene 1 favorito
-        { userId: users[3].id, productId: products[4].id },
-      ],
-    });
-  }
+      { userId: users[2].id, productId: products[3].id },
+
+      { userId: users[3].id, productId: products[4].id },
+    ],
+  });
+
 }
 
 main()
