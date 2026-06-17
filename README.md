@@ -31,6 +31,22 @@ IUPI es una aplicación web desarrollada en **React** que funciona como un catá
 * `Services`: Recursos estáticos como imágenes y logotipos.
 * `Validations`: Se encargan de validar los datos que llegan en las peticiones.
 
+* **Tablero Kanban** : https://github.com/users/Lucasanse/projects/2/views/1
+* **Link Vercel (este repo)**: https://tp4-react-qpo78mgne-lucassansegundo-2401s-projects.vercel.app/
+* **Link Vercel global**:
+
+* Instalacion y configuracion:
+* 1.Clonar el repositorio
+* 2.Ejecutar npm install
+* 3.Cloonar el otro repositorio
+* 4.Ejecutar npm install
+* 5.Creá un archivo .env en la raíz del proyecto con la configuración de la base de datos PostgreSQL
+* 6.Cuando cambies el modelo en schema.prisma, generá y aplicá una migración npx prisma migrate dev --name nombre_migracion
+* 7.Poblá la BD con la seed: npx prisma db seed
+* 8.Ejecuta npm run dev en los dos proyectos
+* 9.Enjoy the experience
+
+* 
 ## Integrantes 
 
 * **Lian Ivan Sinchez FAI-4202**
