@@ -32,8 +32,8 @@ IUPI es una aplicación web desarrollada en **React** que funciona como un catá
 * `Validations`: Se encargan de validar los datos que llegan en las peticiones.
 
 * **Tablero Kanban** : https://github.com/users/Lucasanse/projects/2/views/1
-* **Link Vercel (este repo)**: https://tp4-react-qpo78mgne-lucassansegundo-2401s-projects.vercel.app/
-* **Link Vercel global**:
+* **Link Vercel (este repo)**: https://tp4-react.vercel.app
+* **Link Vercel global**: https://iupitp2react.vercel.app/
 
 * Instalacion y configuracion:
 * 1.Clonar el repositorio
