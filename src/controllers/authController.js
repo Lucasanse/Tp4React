@@ -1,18 +1,35 @@
 const prisma = require("../prisma/prismaClient");
+const bcrypt = require("bcrypt"); 
+const { validateAuth } = require("../validations/entity.validation");
 
 const register = async (req, res, next) => {
   try {
+    // validar formatos
+    const errors = validateAuth(req.body);
+    if (errors.length > 0) {
+      const error = new Error("Error de validación en los datos");
+      error.status = 400;
+      error.errors = errors; 
+      return next(error); 
+    }
+
     const { email, password } = req.body;
-    
     // Verificar si el usuario ya existe
     const existingUser = await prisma.user.findUnique({ where: { email } });
     if (existingUser) {
       return res.status(400).json({ error: "El email ya está registrado" });
     }
 
-    // Crear usuario con contraseña plana
+    // Encriptar la contraseña en 8 steps
+    const steps = 8;
+    const passHasheada = await bcrypt.hash(password, steps);
+
+    // Crear usuario con la versión hasheada de la contraseña
     const newUser = await prisma.user.create({
-      data: { email, password }
+      data: { 
+        email, 
+        password: passHasheada 
+      }
     });
 
     // Devolvemos el ID del usuario creado
@@ -26,15 +43,23 @@ const login = async (req, res, next) => {
   try {
     const { email, password } = req.body;
 
+    // Buscar en la bd coincidencias del login
     const user = await prisma.user.findUnique({ where: { email } });
 
-   
-    if (!user || user.password !== password) {
+    if (!user) {
       const error = new Error("Credenciales inválidas");
       error.status = 401;
       return next(error);
     }
 
+    // Comparar el codigo hash de la encriptacion con la antes guardada en la bd
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+   
+    if (!isPasswordValid) {
+      const error = new Error("Credenciales inválidas");
+      error.status = 401;
+      return next(error);
+    }
     
     res.json({ id: user.id, email: user.email });
   } catch (error) {
