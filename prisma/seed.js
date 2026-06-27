@@ -116,11 +116,31 @@ async function main() {
   // 3. Crear 4 usuarios con las contraseñas en texto plano
   await prisma.user.createMany({
     data: [
-      { email: "admin@admin.com", password: "secreto123" },
-      { email: "lucas@ejemplo.com", password: "secreto123" },
-      { email: "mathias@ejemplo.com", password: "secreto123" },
-      { email: "ayelen@ejemplo.com", password: "secreto123" },
-      { email: "brian@ejemplo.com", password: "secreto123" },
+      {
+        email: "admin@admin.com",
+        password:
+          "$2a$08$UcCzEcNnMhw32117xKvf3.CyxkwNSCf5maY/P4ZyK28Q/crPAovJO",
+      },
+      {
+        email: "lucas@ejemplo.com",
+        password:
+          "$2a$08$UcCzEcNnMhw32117xKvf3.CyxkwNSCf5maY/P4ZyK28Q/crPAovJO",
+      },
+      {
+        email: "mathias@ejemplo.com",
+        password:
+          "$2a$08$UcCzEcNnMhw32117xKvf3.CyxkwNSCf5maY/P4ZyK28Q/crPAovJO",
+      },
+      {
+        email: "ayelen@ejemplo.com",
+        password:
+          "$2a$08$UcCzEcNnMhw32117xKvf3.CyxkwNSCf5maY/P4ZyK28Q/crPAovJO",
+      },
+      {
+        email: "brian@ejemplo.com",
+        password:
+          "$2a$08$UcCzEcNnMhw32117xKvf3.CyxkwNSCf5maY/P4ZyK28Q/crPAovJO",
+      },
     ],
   });
 
@@ -129,7 +149,6 @@ async function main() {
 
   await prisma.favorite.createMany({
     data: [
-
       { userId: users[0].id, productId: products[0].id },
       { userId: users[0].id, productId: products[1].id },
 
@@ -140,7 +159,6 @@ async function main() {
       { userId: users[3].id, productId: products[4].id },
     ],
   });
-
 }
 
 main()
