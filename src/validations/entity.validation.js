@@ -49,4 +49,22 @@ const validateProduct = (data) => {
   return errors;
 };
 
-module.exports = { validateProduct };
+const validateAuth = (data) => {
+  const errors = [];
+
+  // Expresión regular para validar el formato de un email (ej. texto@texto.com)
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  
+  if (!data.email || typeof data.email !== 'string' || !emailRegex.test(data.email)) {
+    errors.push("El campo 'email' es requerido y debe tener un formato de correo válido.");
+  }
+
+  // Validar también que la contraseña exista y no esté vacía
+  if (!data.password || typeof data.password !== 'string' || data.password.trim() === '') {
+    errors.push("El campo 'password' es requerido y no puede estar vacío.");
+  }
+
+  return errors;
+};
+
+module.exports = { validateProduct, validateAuth};

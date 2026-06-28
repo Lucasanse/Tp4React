@@ -1,6 +1,8 @@
 import { defineConfig, env } from "prisma/config";
 import "dotenv/config";
 
+
+
 export default defineConfig({
   schema: "prisma/schema.prisma",
   datasource: {
@@ -11,3 +13,5 @@ export default defineConfig({
     seed: "node prisma/seed.js",
   },
 });
+
+
