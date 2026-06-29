@@ -20,11 +20,12 @@ const getFavoritos = async (req, res, next) => {
 
 const getFavoritosChecker = async (req, res, next) => {
   try {
-    const userId = parseInt(req.params.userId, 10);
+    // Tomamos el userId del token (req.user.id) en lugar de req.params
+    const userId = req.user.id; 
     const productoId = parseInt(req.params.productoId, 10);
 
-    if (isNaN(userId) || isNaN(productoId)) {
-      return res.status(400).json({ error: "IDs inválidos" });
+    if (isNaN(productoId)) {
+      return res.status(400).json({ error: "ID de producto inválido" });
     }
 
     const favorito = await prisma.favorite.findUnique({
@@ -41,7 +42,8 @@ const getFavoritosChecker = async (req, res, next) => {
       return res.json(-1);
     }
 
-    res.json(favorito.product);
+    //  Devolvemos el objeto favorito para que el frontend pueda leer data.id
+    res.json(favorito); 
   } catch (error) {
     next(error);
   }

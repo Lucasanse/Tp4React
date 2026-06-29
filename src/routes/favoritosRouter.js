@@ -10,9 +10,6 @@ router.use(verificarToken);
 router.get("/", favoritosController.getFavoritos);
 router.post("/", favoritosController.addFavorito);
 router.delete("/:productoId", favoritosController.removeFavorito);
-router.get(
-  "/checker/:userId/:productoId",
-  favoritosController.getFavoritosChecker,
-);
+router.get("/checker/:productoId", favoritosController.getFavoritosChecker);
 
 module.exports = router;
