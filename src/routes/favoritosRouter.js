@@ -1,13 +1,18 @@
 const express = require("express");
 const router = express.Router();
 const favoritosController = require("../controllers/favoritosController");
+const { verificarToken } = require("../middlewares/authMiddleware");
 
-router.get("/:userId", favoritosController.getFavoritos);
+// Exigir autenticación para TODAS las rutas de favoritos
+router.use(verificarToken);
+
+
+router.get("/", favoritosController.getFavoritos);
+router.post("/", favoritosController.addFavorito);
+router.delete("/:productoId", favoritosController.removeFavorito);
 router.get(
   "/checker/:userId/:productoId",
   favoritosController.getFavoritosChecker,
 );
-router.post("/", favoritosController.addFavorito);
-router.delete("/", favoritosController.removeFavorito);
 
 module.exports = router;
