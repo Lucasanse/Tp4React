@@ -84,8 +84,7 @@ const getMe = async (req, res, next) => {
       select: {
         id: true,
         email: true,
-        rol: true,
-        favorites: true, // esto pa probar
+        rol: true
       },
     });
 
@@ -101,4 +100,13 @@ const getMe = async (req, res, next) => {
   }
 };
 
-module.exports = { register, login, getMe };
+const logout = async (req, res, next) => {
+  try {
+    //  es una implementación básica de JWT sin refresh token en la BD
+    res.status(200).json({ message: "Sesión cerrada correctamente" });
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports = { register, login, getMe, logout };
