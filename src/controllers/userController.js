@@ -63,44 +63,6 @@ const create = async (req, res, next) => {
   }
 };
 
-const register = async (req, res, next) => {
-  try {
-    const errors = validateUser(req.body);
-    if (errors.length > 0) {
-      const error = new Error("Error de validación en los datos");
-      error.status = 400;
-      error.errors = errors;
-      return next(error);
-    }
-
-    // Verificar email duplicado
-    const { email, password } = req.body;
-    const existing = await userService.getUsers(undefined, undefined, email);
-    if (existing.length > 0) {
-      const error = new Error("El email ya está registrado");
-      error.status = 409;
-      return next(error);
-    }
-
-    // Hashear password y descartar id del body
-    const hashedPassword = await bcrypt.hash(password, 10);
-    const { id, ...safeData } = req.body;
-    const newUser = await userService.createUser({ ...safeData, password: hashedPassword });
-
-    // Generar token
-    const accessToken = generarAcessToken(newUser);
-    res.status(201).json({ user: newUser, accessToken });
-
-  } catch (error) {
-    if (error.code === "P2002") {
-      const err = new Error("Ya se encuentra un usuario con esa ID");
-      err.status = 409;
-      return next(err);
-    }
-    next(error);
-  }
-};
-
 const deleteUser = async (req, res, next) => {
   try {
     const { id } = req.params;
