@@ -33,7 +33,7 @@ const verificarToken = (req, res, next) => {
     
     // Si la firma es inválida o el token fue modificado
     const error = new Error("Token inválido");
-    error.status = 401;
+    error.status = 403;
     next(error);
   }
 };
