@@ -67,4 +67,32 @@ const login = async (req, res, next) => {
   }
 };
 
-module.exports = { register, login };
+const getMe = async (req, res, next) => {
+  try {
+    // Obtenemos el ID extraído del token por el middleware
+    const userId = req.user.id;
+
+    // Buscamos los datos en la base de datos
+    const user = await prisma.user.findUnique({
+      where: { id: userId },
+      select: {
+        id: true,
+        email: true,
+        rol: true, 
+        favorites: true // esto pa probar 
+      }
+    });
+
+    if (!user) {
+      const error = new Error("Usuario no encontrado");
+      error.status = 404;
+      return next(error);
+    }
+
+    res.json(user);
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports = { register, login, getMe };
