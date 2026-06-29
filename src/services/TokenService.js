@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 
-function generarAcessToken(user) {
+function generarAccessToken(user) {
   return jwt.sign(
     {
       id: user.id,
@@ -12,4 +12,4 @@ function generarAcessToken(user) {
   );
 }
 
-module.exports = { generarAcessToken };
+module.exports = { generarAccessToken };

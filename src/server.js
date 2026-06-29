@@ -1,4 +1,4 @@
-require('dotenv').config();
+require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 
@@ -16,7 +16,9 @@ app.use(cors({ origin: process.env.FRONTEND_URL }));
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  res.status(200).json({ status: "ok", message: "Bienvenido! API funcionando" });
+  res
+    .status(200)
+    .json({ status: "ok", message: "Bienvenido! API funcionando" });
 });
 
 app.get("/api/health", (req, res) => {

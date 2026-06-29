@@ -1,6 +1,7 @@
 const prisma = require("../prisma/prismaClient");
-const bcrypt = require("bcrypt"); 
+const bcrypt = require("bcrypt");
 const { validateAuth } = require("../validations/entity.validation");
+const { generarAccessToken } = require("../services/TokenService");
 
 const register = async (req, res, next) => {
   try {
@@ -9,8 +10,8 @@ const register = async (req, res, next) => {
     if (errors.length > 0) {
       const error = new Error("Error de validación en los datos");
       error.status = 400;
-      error.errors = errors; 
-      return next(error); 
+      error.errors = errors;
+      return next(error);
     }
 
     const { email, password } = req.body;
@@ -26,10 +27,10 @@ const register = async (req, res, next) => {
 
     // Crear usuario con la versión hasheada de la contraseña
     const newUser = await prisma.user.create({
-      data: { 
-        email, 
-        password: passHasheada 
-      }
+      data: {
+        email,
+        password: passHasheada,
+      },
     });
 
     // Devolvemos el ID del usuario creado
@@ -54,14 +55,19 @@ const login = async (req, res, next) => {
 
     // Comparar el codigo hash de la encriptacion con la antes guardada en la bd
     const isPasswordValid = await bcrypt.compare(password, user.password);
-   
+
     if (!isPasswordValid) {
       const error = new Error("Credenciales inválidas");
       error.status = 401;
       return next(error);
     }
-    
-    res.json({ id: user.id, email: user.email });
+    const token = generarAccessToken(user);
+    res.json({
+      id: user.id,
+      email: user.email,
+      rol: user.rol,
+      accessToken: token,
+    });
   } catch (error) {
     next(error);
   }
@@ -78,9 +84,8 @@ const getMe = async (req, res, next) => {
       select: {
         id: true,
         email: true,
-        rol: true, 
-        favorites: true // esto pa probar 
-      }
+        rol: true
+      },
     });
 
     if (!user) {
@@ -95,4 +100,13 @@ const getMe = async (req, res, next) => {
   }
 };
 
-module.exports = { register, login, getMe };
+const logout = async (req, res, next) => {
+  try {
+    //  es una implementación básica de JWT sin refresh token en la BD
+    res.status(200).json({ message: "Sesión cerrada correctamente" });
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports = { register, login, getMe, logout };
