@@ -34,7 +34,7 @@ const register = async (req, res, next) => {
     });
     
     // Generar token igual que en login
-    const accessToken = generarAcessToken(newUser);
+    const accessToken = generarAccessToken(newUser);
 
     // Devolvemos el ID del usuario creado
     res.status(201).json({ id: newUser.id, email: newUser.email, accessToken });
