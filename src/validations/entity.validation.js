@@ -5,7 +5,34 @@ const validateProperties = (data) => {
     properties.push(key)
   }
   for (let index = 0; index < properties.length; index++) {
-    if(!["id", "name", "avatar", "description", "price", "stock", "createdAt", "updatedAt"].includes(properties[index])){
+    if(!["id", 
+      "name", 
+      "avatar", 
+      "description", 
+      "price", 
+      "stock", 
+      "createdAt", 
+      "updatedAt"].includes(properties[index])){
+      invalidProperties.push(properties[index])
+    }    
+  }
+  return invalidProperties
+}
+
+const validateUserProperties = (data) => {
+  let properties = []
+  let invalidProperties = []
+  for (const [key, value] of Object.entries(data)) {
+    properties.push(key)
+  }
+  for (let index = 0; index < properties.length; index++) {
+    if(![
+      "rol",
+      "id",
+      "email",
+      "password",
+      "createdAt", 
+      "updatedAt"].includes(properties[index])){
       invalidProperties.push(properties[index])
     }    
   }
@@ -49,6 +76,29 @@ const validateProduct = (data) => {
   return errors;
 };
 
+const validateUser = (data) => {
+  const errors = [];
+  const invalidProperties = validateUserProperties(data)
+
+  if(invalidProperties.length > 0){
+    errors.push("Campos inválidos: " + invalidProperties);
+  }
+
+  console.log(data)
+
+  // Validar name
+  if (!data.email || typeof data.email !== 'string' || data.email.trim() === '') {
+    errors.push("El campo 'email' es requerido y no puede estar vacío.");
+  }
+
+  // Validar description
+  if (!data.password || typeof data.password !== 'string' || data.password.trim() === '') {
+    errors.push("El campo 'password' es requerido y no puede estar vacío.");
+  }
+
+  return errors
+}
+
 const validateAuth = (data) => {
   const errors = [];
 
@@ -67,4 +117,4 @@ const validateAuth = (data) => {
   return errors;
 };
 
-module.exports = { validateProduct, validateAuth};
+module.exports = { validateProduct, validateUser , validateAuth};

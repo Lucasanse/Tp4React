@@ -32,9 +32,12 @@ const register = async (req, res, next) => {
         password: passHasheada,
       },
     });
+    
+    // Generar token igual que en login
+    const accessToken = generarAccessToken(newUser);
 
     // Devolvemos el ID del usuario creado
-    res.status(201).json({ id: newUser.id, email: newUser.email });
+    res.status(201).json({ id: newUser.id, email: newUser.email, accessToken });
   } catch (error) {
     next(error);
   }

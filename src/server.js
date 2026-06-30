@@ -4,8 +4,9 @@ const cors = require("cors");
 
 // Importación de Rutas
 const productosRoute = require("./routes/productosRouter");
-const authRoute = require("./routes/authRouter");
-const favoritesRoute = require("./routes/favoritosRouter");
+const authRoute = require("./routes/authRouter"); 
+const favoritesRoute = require("./routes/favoritosRouter"); 
+const userRouter = require("./routes/userRouter"); 
 
 const { notFound, errorHandler } = require("./middlewares/errorHandler");
 
@@ -25,11 +26,10 @@ app.get("/api/health", (req, res) => {
 });
 
 // Enrutadores
-app.use("/api/productos", productosRoute);
-app.use("/api/auth", authRoute);
-app.use("/api/favoritos", favoritesRoute);
-
-app.use("/auth", authRoute);
+app.use('/api/productos', productosRoute);
+app.use('/api/auth', authRoute);
+app.use('/api/favoritos', favoritesRoute); 
+app.use('/api/users', userRouter); 
 
 // Si la ruta no se encontró arriba, entra al notFound (404)aa
 app.use(notFound);
