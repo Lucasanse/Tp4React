@@ -61,7 +61,7 @@ IUPI es una aplicación web desarrollada en **React** que funciona como un catá
 ## Enlaces de Interés
 
 * **Tablero Kanban**: [Ver Tablero](https://github.com/users/Lucasanse/projects/2/views/1)
-**Tablero Kanban tp seguridad**: [Ver Tablero](https://github.com/users/Lucasanse/projects/3)
+* **Tablero Kanban tp seguridad**: [Ver Tablero](https://github.com/users/Lucasanse/projects/3)
 * **Deploy Vercel (este repositorio)**: [tp4-react.vercel.app](https://tp4-react.vercel.app)
 * **Deploy Vercel Global**: [iupitp2react.vercel.app](https://iupitp2react.vercel.app/)
 
