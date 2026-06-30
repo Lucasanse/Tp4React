@@ -75,7 +75,7 @@ IUPI es una aplicación web desarrollada en **React** que funciona como un catá
 6. Ejecutar las migraciones en la base de datos: `npx prisma migrate dev`.
 7. Poblar la base de datos con información inicial (seed): `npx prisma db seed`.
 8. Ejecutar el servidor con `npm run dev`.
-9. ¡Disfrutar de la experiencia!
+9. Enjoy
 
 ## Integrantes 
 
